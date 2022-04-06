@@ -2,7 +2,8 @@ defmodule ZiosPizza.Pizzas.Router do
   use Plug.Router
   use Plug.ErrorHandler
 
-  alias ZiosPizza.Pizzas.Repo
+  #alias ZiosPizza.Pizzas.Repo
+  alias ZiosPizza.Pizzas.Cache
 
   plug(Plug.Parsers,
     parsers: [:urlencoded, :json],
@@ -14,7 +15,7 @@ defmodule ZiosPizza.Pizzas.Router do
   plug(:dispatch)
 
   get "/" do
-    pizzas = Enum.map(Repo.get_all(), &project/1)
+    pizzas = Enum.map(Cache.get_pizzas, &project/1)
 
     # ZiosPizza.Pizzas.Cache.load_pizzas()
 
