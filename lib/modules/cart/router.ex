@@ -1,6 +1,8 @@
 defmodule ZiosPizza.Cart.Router do
   use Plug.Router
 
+  alias ZiosPizza.Cart.CommandBuilder
+
   plug(Plug.Parsers,
     parsers: [:urlencoded, :json],
     pass: ["*/*"],
@@ -13,7 +15,7 @@ defmodule ZiosPizza.Cart.Router do
   plug(:dispatch)
 
   post "/" do
-    user_id = conn.assign[:user]
+    user_id = conn.assigns[:user]
 
     case CommandBuilder.build_add_pizza_cmd(conn.body_params) do
       {:ok, cmd} ->
