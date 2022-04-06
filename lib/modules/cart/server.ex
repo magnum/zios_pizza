@@ -29,7 +29,7 @@ defmodule ZiosPizza.Cart.Server do
 
 
   def parse_pizzas(pizzas) do
-    #todo...
+    Enum.group_by(pizzas, &elem(&1, 0), &elem(&1, 1))
   end
 
   defp calculate_total(pizzas) do
