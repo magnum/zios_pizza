@@ -29,7 +29,9 @@ defmodule ZiosPizza.Cart.Server do
 
 
   def parse_pizzas(pizzas) do
-    Enum.group_by(pizzas, &elem(&1, 0), &elem(&1, 1))
+    #Enum.group_by(pizzas, fn p -> p[:id] end, fn p -> p end)
+    require IEx; IEx.pry
+    pizzas
   end
 
   defp calculate_total(pizzas) do
